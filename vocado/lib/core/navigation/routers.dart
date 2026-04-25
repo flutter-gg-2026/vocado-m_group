@@ -7,4 +7,7 @@ class Routes {
   static const String loading = '/loading';
   static const String signUp = '/signUp';
   static const String team = '/team';
+  static const String tasksBoard = '/tasksBoard';
+  static const String profile = '/profile';
+  static const String mainNav = '/mainNav';
 }

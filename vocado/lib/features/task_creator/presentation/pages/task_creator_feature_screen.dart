@@ -34,14 +34,8 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
             context.showSnackBar(state.message, isError: true);
           }
         },
-        child: Column(
-          children: [
-            IconButton(
-              onPressed: () {
-                context.push(Routes.team);
-              },
-              icon: Icon(Icons.next_plan),
-            ),
+        child: Column(children: [
+         
           ],
         ),
       ),

@@ -7,6 +7,9 @@ import 'package:vocado/features/task_viewer/di/task_viewer_di.dart';
 import 'package:vocado/features/loading/di/loading_di.dart';
 import 'package:vocado/features/sign_up/di/sign_up_di.dart';
 import 'package:vocado/features/team/di/team_di.dart';
+import 'package:vocado/features/tasks_board/di/tasks_board_di.dart';
+import 'package:vocado/features/profile/di/profile_di.dart';
+import 'package:vocado/features/main_nav/di/main_nav_di.dart';
 
 @InjectableInit(
   initializerName: 'init', 
@@ -24,4 +27,7 @@ Future<void> configureDependencies() async {
     configureLoading(getIt);
     configureSignUp(getIt);
     configureTeam(getIt);
+    configureTasksBoard(getIt);
+    configureProfile(getIt);
+    configureMainNav(getIt);
 }

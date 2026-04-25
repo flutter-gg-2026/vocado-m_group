@@ -15,7 +15,12 @@ import 'package:vocado/features/sign_up/presentation/pages/sign_up_feature_scree
 import 'package:vocado/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:vocado/features/team/presentation/pages/team_feature_screen.dart';
 import 'package:vocado/features/team/presentation/cubit/team_cubit.dart';
-
+import 'package:vocado/features/tasks_board/presentation/pages/tasks_board_feature_screen.dart';
+import 'package:vocado/features/tasks_board/presentation/cubit/tasks_board_cubit.dart';
+import 'package:vocado/features/profile/presentation/pages/profile_feature_screen.dart';
+import 'package:vocado/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:vocado/features/main_nav/presentation/pages/main_nav_feature_screen.dart';
+import 'package:vocado/features/main_nav/presentation/cubit/main_nav_cubit.dart';
 
 
 
@@ -38,14 +43,6 @@ class AppRouter {
     builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(GetIt.I.get()),
           child: const AuthFeatureScreen(),
-        ),
-  ),
-
-  GoRoute(
-    path: Routes.taskCreator,
-    builder: (context, state) => BlocProvider(
-          create: (context) => TaskCreatorCubit(GetIt.I.get()),
-          child: const TaskCreatorFeatureScreen(),
         ),
   ),
 
@@ -73,11 +70,12 @@ class AppRouter {
         ),
   ),
 
+
   GoRoute(
-    path: Routes.team,
+    path: Routes.mainNav,
     builder: (context, state) => BlocProvider(
-          create: (context) => TeamCubit(GetIt.I.get()),
-          child: const TeamFeatureScreen(),
+          create: (context) => MainNavCubit(GetIt.I.get()),
+          child: const MainNavFeatureScreen(),
         ),
   ),
 ],
