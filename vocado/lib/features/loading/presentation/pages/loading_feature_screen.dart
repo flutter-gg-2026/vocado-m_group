@@ -18,7 +18,7 @@ class LoadingFeatureScreen extends StatelessWidget {
             if (state.isLogging && state.role == "member") {
               context.go(Routes.taskViewer);
             } else if (state.isLogging && state.role == "admin") {
-              context.go(Routes.mainNav);
+              context.go(Routes.taskCreator);
             } else {
               context.go(Routes.auth);
             }
