@@ -14,4 +14,7 @@ class TaskCreatorUseCase {
    Future<Result<TaskCreatorEntity, Failure>> getTaskCreator() async {
     return _repositoryData.getTaskCreator();
   }
+   Future<Result<bool, Failure>> signOut() async {
+    return _repositoryData.signOut();
+  }
 }

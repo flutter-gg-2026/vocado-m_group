@@ -6,4 +6,5 @@ class Routes {
   static const String taskViewer = '/taskViewer';
   static const String loading = '/loading';
   static const String signUp = '/signUp';
+  static const String team = '/team';
 }

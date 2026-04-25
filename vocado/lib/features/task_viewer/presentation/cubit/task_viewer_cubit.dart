@@ -14,7 +14,19 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
         //here is when success result
       },
       (whenError) {
-       //here is when error result
+        //here is when error result
+      },
+    );
+  }
+
+  Future<void> getSignOutMethod() async {
+    final result = await _taskViewerUseCase.getSignOut();
+    result.when(
+      (success) {
+        emit(SignOutSuccessState());
+      },
+      (whenError) {
+        emit(TaskViewerErrorState(message: whenError.message));
       },
     );
   }

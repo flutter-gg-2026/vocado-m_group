@@ -4,30 +4,38 @@ import 'package:vocado/core/services/local_keys_service.dart';
 import 'package:vocado/features/task_creator/data/models/task_creator_model.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
 
-
 abstract class BaseTaskCreatorRemoteDataSource {
   Future<TaskCreatorModel> getTaskCreator();
+  Future<bool> signOut();
 }
-
 
 @LazySingleton(as: BaseTaskCreatorRemoteDataSource)
 class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
- 
   final SupabaseClient _supabase;
   final LocalKeysService _localKeysService;
-  
-  
 
-   TaskCreatorRemoteDataSource(this._localKeysService, this._supabase);
+  TaskCreatorRemoteDataSource(this._localKeysService, this._supabase);
 
-
-
-    @override
+  @override
   Future<TaskCreatorModel> getTaskCreator() async {
     try {
-      return TaskCreatorModel(id: 1, firstName: "Last Name", lastName: "First Name");
+      return TaskCreatorModel(
+        id: 1,
+        firstName: "Last Name",
+        lastName: "First Name",
+      );
     } catch (error) {
-     throw FailureExceptions.getException(error);
+      throw FailureExceptions.getException(error);
+    }
+  }
+
+  @override
+  Future<bool> signOut() async {
+    try {
+      await _supabase.auth.signOut();
+      return true;
+    } catch (error) {
+      throw FailureExceptions.getException(error);
     }
   }
 }

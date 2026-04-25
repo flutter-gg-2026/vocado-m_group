@@ -9,6 +9,7 @@ abstract class TaskViewerState extends Equatable {
 
 class TaskViewerInitialState extends TaskViewerState {}
 class TaskViewerSuccessState extends TaskViewerState {}
+class SignOutSuccessState extends TaskViewerState {}
 
 class TaskViewerErrorState extends TaskViewerState {
   final String message;

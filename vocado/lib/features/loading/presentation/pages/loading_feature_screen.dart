@@ -26,6 +26,7 @@ class LoadingFeatureScreen extends StatelessWidget {
 
           if (state is LoadingErrorState) {
             context.showSnackBar(state.message, isError: true);
+            context.go(Routes.auth);
           }
         },
         child: LoadingWidget(),

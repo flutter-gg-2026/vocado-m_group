@@ -18,6 +18,12 @@ class LoadingRemoteDataSource implements BaseLoadingRemoteDataSource {
   @override
   Future<LoadingModel> getLogin() async {
     try {
+      final user = _supabase.auth.currentUser;
+      
+      if (user == null) {
+        return LoadingModel(isLogging: false, role: null);
+      }
+
       final userToken = _supabase.auth.currentSession?.accessToken;
       bool isUser = userToken != null;
       final expire = _supabase.auth.currentSession?.isExpired ?? true;

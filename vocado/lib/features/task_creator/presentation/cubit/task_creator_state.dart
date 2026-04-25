@@ -10,6 +10,8 @@ abstract class TaskCreatorState extends Equatable {
 class TaskCreatorInitialState extends TaskCreatorState {}
 class TaskCreatorSuccessState extends TaskCreatorState {}
 
+class SignOutSuccessState extends TaskCreatorState {}
+
 class TaskCreatorErrorState extends TaskCreatorState {
   final String message;
   const TaskCreatorErrorState({required this.message});

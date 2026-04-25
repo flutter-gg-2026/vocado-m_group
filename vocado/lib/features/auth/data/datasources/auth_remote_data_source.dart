@@ -17,7 +17,7 @@ class AuthRemoteDataSource implements BaseAuthRemoteDataSource {
     required String password,
   }) async {
     try {
-      await _supabase.auth.signInWithPassword(password: password);
+      await _supabase.auth.signInWithPassword(password: password, email: email);
       return true;
     } catch (error) {
       throw FailureExceptions.getException(error);

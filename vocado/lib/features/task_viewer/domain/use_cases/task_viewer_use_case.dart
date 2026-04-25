@@ -14,4 +14,7 @@ class TaskViewerUseCase {
    Future<Result<TaskViewerEntity, Failure>> getTaskViewer() async {
     return _repositoryData.getTaskViewer();
   }
+   Future<Result<bool, Failure>> getSignOut() async {
+    return _repositoryData.getSignOut();
+  }
 }

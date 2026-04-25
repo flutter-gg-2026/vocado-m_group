@@ -4,4 +4,5 @@ import 'package:vocado/features/task_viewer/domain/entities/task_viewer_entity.d
 
 abstract class TaskViewerRepositoryDomain {
     Future<Result<TaskViewerEntity, Failure>> getTaskViewer();
+    Future<Result<bool, Failure>> getSignOut();
 }

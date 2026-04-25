@@ -13,6 +13,9 @@ import 'package:vocado/features/loading/presentation/pages/loading_feature_scree
 import 'package:vocado/features/loading/presentation/cubit/loading_cubit.dart';
 import 'package:vocado/features/sign_up/presentation/pages/sign_up_feature_screen.dart';
 import 'package:vocado/features/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'package:vocado/features/team/presentation/pages/team_feature_screen.dart';
+import 'package:vocado/features/team/presentation/cubit/team_cubit.dart';
+
 
 
 
@@ -67,6 +70,14 @@ class AppRouter {
     builder: (context, state) => BlocProvider(
           create: (context) => SignUpCubit(GetIt.I.get()),
           child: const SignUpFeatureScreen(),
+        ),
+  ),
+
+  GoRoute(
+    path: Routes.team,
+    builder: (context, state) => BlocProvider(
+          create: (context) => TeamCubit(GetIt.I.get()),
+          child: const TeamFeatureScreen(),
         ),
   ),
 ],
