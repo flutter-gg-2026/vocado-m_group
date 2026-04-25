@@ -1,7 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:vocado/features/task_creator/presentation/pages/error_screen.dart';
-import 'package:vocado/features/task_creator/presentation/pages/task_details_screen.dart';
+import 'package:vocado/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:vocado/features/profile/presentation/pages/profile_feature_screen.dart';
+import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
+import 'package:vocado/features/task_creator/presentation/pages/task_creator_feature_screen.dart';
+import 'package:vocado/features/tasks_board/presentation/cubit/tasks_board_cubit.dart';
+import 'package:vocado/features/tasks_board/presentation/pages/tasks_board_feature_screen.dart';
+import 'package:vocado/features/team/presentation/cubit/team_cubit.dart';
+import 'package:vocado/features/team/presentation/pages/team_feature_screen.dart';
 import 'routers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,17 +20,61 @@ import 'package:vocado/features/loading/presentation/cubit/loading_cubit.dart';
 import 'package:vocado/features/sign_up/presentation/pages/sign_up_feature_screen.dart';
 import 'package:vocado/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:vocado/features/main_nav/presentation/pages/main_nav_feature_screen.dart';
-import 'package:vocado/features/main_nav/presentation/cubit/main_nav_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.loading,
     routes: [
-      GoRoute(
-        path: Routes.splash,
-        builder: (context, state) {
-          return Scaffold(body: Center(child: Text("splash screen")));
-        }, // SplashScreen
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainNavFeatureScreen(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.taskCreator,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => TaskCreatorCubit(GetIt.I.get()),
+                  child: const TaskCreatorFeatureScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.team,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => TeamCubit(GetIt.I.get()),
+                  child: const TeamFeatureScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tasksBoard,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => TasksBoardCubit(GetIt.I.get()),
+                  child: const TasksBoardFeatureScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.profile,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => ProfileCubit(GetIt.I.get()),
+                  child: const ProfileFeatureScreen(),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
 
       GoRoute(
@@ -57,27 +107,6 @@ class AppRouter {
           create: (context) => SignUpCubit(GetIt.I.get()),
           child: const SignUpFeatureScreen(),
         ),
-      ),
-
-      GoRoute(
-        path: Routes.mainNav,
-        builder: (context, state) => BlocProvider(
-          create: (context) => MainNavCubit(GetIt.I.get()),
-          child: const MainNavFeatureScreen(),
-        ),
-      ),
-      GoRoute(
-        path: Routes.taskDetails,
-        builder: (context, state) {
-          final json = state.extra as Map<String, dynamic>;
-          return TaskDetailsScreen(json: json);
-        },
-      ),
-      GoRoute(
-        path: Routes.errorState,
-        builder: (context, state) {
-          return ErrorScreen();
-        }, // SplashScreen
       ),
     ],
 

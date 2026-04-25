@@ -11,8 +11,8 @@ class TaskCreatorInitialState extends TaskCreatorState {}
 
 class TaskCreatorSuccessState extends TaskCreatorState {
   final Map<String, dynamic> json;
-
   const TaskCreatorSuccessState({required this.json});
+  
   @override
   List<Object?> get props => [json];
 }

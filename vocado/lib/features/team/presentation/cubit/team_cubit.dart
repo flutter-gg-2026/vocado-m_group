@@ -13,7 +13,7 @@ class TeamCubit extends Cubit<TeamState> {
     final result = await _teamUseCase.getTeam();
     result.when(
       (success) {
-        emit(TeamSuccessState());
+        emit(TeamSuccessState(team: success));
       },
       (whenError) {
         emit(TeamErrorState(message: whenError.message));
@@ -21,11 +21,28 @@ class TeamCubit extends Cubit<TeamState> {
     );
   }
 
-  Future<void> getAddMember() async {
-    final result = await _teamUseCase.getAddMember();
+  Future<void> getAllMember() async {
+    final result = await _teamUseCase.getAllMember();
     result.when(
       (success) {
-        emit(TeamSuccessState());
+        emit(LoadingSuccessState());
+        emit(MemberSuccessState(members: success));
+      },
+      (whenError) {
+        emit(TeamErrorState(message: whenError.message));
+      },
+    );
+  }
+
+  Future<void> addMember({
+    required String id,
+    required String name,
+    required String role,
+  }) async {
+    final result = await _teamUseCase.addMember(id: id, name: name, role: role);
+    result.when(
+      (success) {
+        emit(AddMemberSuccessState());
       },
       (whenError) {
         emit(TeamErrorState(message: whenError.message));
