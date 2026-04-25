@@ -8,9 +8,14 @@ abstract class TaskCreatorState extends Equatable {
 }
 
 class TaskCreatorInitialState extends TaskCreatorState {}
-class TaskCreatorSuccessState extends TaskCreatorState {}
 
-class SignOutSuccessState extends TaskCreatorState {}
+class TaskCreatorSuccessState extends TaskCreatorState {
+  final Map<String, dynamic> json;
+
+  const TaskCreatorSuccessState({required this.json});
+  @override
+  List<Object?> get props => [json];
+}
 
 class TaskCreatorErrorState extends TaskCreatorState {
   final String message;
@@ -18,4 +23,3 @@ class TaskCreatorErrorState extends TaskCreatorState {
   @override
   List<Object?> get props => [message];
 }
-

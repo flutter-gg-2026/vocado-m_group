@@ -23,14 +23,4 @@ class TaskCreatorRepositoryData implements TaskCreatorRepositoryDomain {
       return Error(FailureExceptions.getException(error));
     }
   }
-
-  @override
-  Future<Result<bool, Failure>> signOut() async {
-    try {
-      final response = await remoteDataSource.signOut();
-      return Success(response);
-    } catch (error) {
-      return Error(FailureExceptions.getException(error));
-    }
-  }
 }

@@ -18,6 +18,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 import '../network/dio_client.dart' as _i667;
 import '../services/local_keys_service.dart' as _i945;
 import '../services/user_service.dart' as _i381;
+import '../services/voice_service.dart' as _i950;
 import 'third_part.dart' as _i423;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -37,6 +38,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i667.DioClient>(() => _i667.DioClient());
     gh.lazySingleton<_i381.UserService>(() => _i381.UserService());
+    gh.lazySingleton<_i950.VoiceService>(() => _i950.VoiceService());
     gh.singleton<_i945.LocalKeysService>(() => _i945.LocalKeysService());
     return this;
   }

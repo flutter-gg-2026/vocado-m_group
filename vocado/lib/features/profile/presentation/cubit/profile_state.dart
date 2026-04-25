@@ -8,7 +8,10 @@ abstract class ProfileState extends Equatable {
 }
 
 class ProfileInitialState extends ProfileState {}
+
 class ProfileSuccessState extends ProfileState {}
+
+class SignOutSuccessState extends ProfileState {}
 
 class ProfileErrorState extends ProfileState {
   final String message;
@@ -16,4 +19,3 @@ class ProfileErrorState extends ProfileState {
   @override
   List<Object?> get props => [message];
 }
-

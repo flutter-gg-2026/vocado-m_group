@@ -25,9 +25,13 @@ dependencies:
   go_router: ^17.2.2
   injectable: ^3.0.0
   json_annotation: ^4.11.0
+  just_audio: ^0.10.5
   loading_animation_widget: ^1.3.0
+  lottie: ^3.3.3
   multiple_result: ^5.3.0
   package_info_plus: ^9.0.1
+  path_provider: ^2.1.5
+  record: ^6.2.0
   sizer: ^3.1.3
   supabase_flutter: ^2.12.4
   uuid: ^4.5.3
@@ -44,5 +48,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/translations/
+    - assets/animation/
     - .env
   uses-material-design: true

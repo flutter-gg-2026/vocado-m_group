@@ -4,5 +4,4 @@ import 'package:vocado/features/task_creator/domain/entities/task_creator_entity
 
 abstract class TaskCreatorRepositoryDomain {
     Future<Result<TaskCreatorEntity, Failure>> getTaskCreator();
-    Future<Result<bool, Failure>> signOut();
 }

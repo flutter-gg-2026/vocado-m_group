@@ -3,6 +3,8 @@ class Routes {
   static const String splash = '/';
   static const String auth = '/auth';
   static const String taskCreator = '/taskCreator';
+  static const String taskDetails = '/taskDetails';
+  static const String errorState = '/errorState';
   static const String taskViewer = '/taskViewer';
   static const String loading = '/loading';
   static const String signUp = '/signUp';

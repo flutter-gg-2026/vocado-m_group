@@ -6,7 +6,6 @@ import 'package:vocado/core/errors/network_exceptions.dart';
 
 abstract class BaseTaskCreatorRemoteDataSource {
   Future<TaskCreatorModel> getTaskCreator();
-  Future<bool> signOut();
 }
 
 @LazySingleton(as: BaseTaskCreatorRemoteDataSource)
@@ -24,16 +23,6 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
         firstName: "Last Name",
         lastName: "First Name",
       );
-    } catch (error) {
-      throw FailureExceptions.getException(error);
-    }
-  }
-
-  @override
-  Future<bool> signOut() async {
-    try {
-      await _supabase.auth.signOut();
-      return true;
     } catch (error) {
       throw FailureExceptions.getException(error);
     }

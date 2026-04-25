@@ -14,7 +14,19 @@ class ProfileCubit extends Cubit<ProfileState> {
         //here is when success result
       },
       (whenError) {
-       //here is when error result
+        //here is when error result
+      },
+    );
+  }
+
+  Future<void> getSignOut() async {
+    final result = await _profileUseCase.signOut();
+    result.when(
+      (success) {
+        emit(SignOutSuccessState());
+      },
+      (whenError) {
+        emit(ProfileErrorState(message: whenError.message));
       },
     );
   }

@@ -19,16 +19,26 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
     );
   }
 
-  Future<void> getSignOut() async {
-    final result = await _taskCreatorUseCase.signOut();
-    result.when(
-      (success) {
-        emit(SignOutSuccessState());
-      },
-      (whenError) {
-        emit(TaskCreatorErrorState(message: whenError.message));
-      },
-    );
+  void getTask({Map<String, dynamic>? json}) {
+    if (json == null) {
+      emit(const TaskCreatorErrorState(message: "No data received"));
+      return;
+    }
+
+    if (json["error"] == true) {
+      emit(TaskCreatorErrorState(message: json["message"] ?? "AI failed"));
+      return;
+    }
+
+    final task = json["task"]?.toString().trim() ?? "";
+    final assignee = json["assignee"]?.toString().trim() ?? "";
+
+    if (task.isEmpty || assignee.isEmpty) {
+      emit(const TaskCreatorErrorState(message: "Invalid task data"));
+      return;
+    }
+
+    emit(TaskCreatorSuccessState(json: json));
   }
 
   @override
