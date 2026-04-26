@@ -72,7 +72,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                           spacing: 16,
                           children: [
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
@@ -134,17 +133,16 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
 
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
                                   children: [
                                     Text(
-                                      "Completed Tasks",
+                                      "Late",
                                       style: TextStyle(
                                         fontWeight: .bold,
                                         fontSize: 20,
-                                        color: Colors.black,
+                                        color: Colors.redAccent,
                                       ),
                                     ),
                                     TextButton(
@@ -163,31 +161,22 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                                     itemCount: state.tasks.length,
                                     itemBuilder: (context, index) {
                                       final task = state.tasks[index];
-                                      if (task.status != 'Done') {
+                                      if (task.status != 'Done' && task.dueDate.toDateTime!.isBefore(DateTime.timestamp())) {
                                         return SizedBox.shrink();
                                       }
                                       return TaskContainer(
                                         task: task.task,
                                         date: task.dueDate,
-                                        child: DropdownMenu(
-                                          onSelected: (value) {
+                                        child: Checkbox(
+                                          value: false,
+                                          onChanged: (value) {
                                             cubit.changeTaskStatusMethod(
                                               taskId: task.id,
-                                              newStatus: value!,
+                                              newStatus: "Done",
                                             );
                                           },
-                                          label: Text("Select Task Status"),
-                                          dropdownMenuEntries: [
-                                            DropdownMenuEntry(
-                                              value: "In Progress",
-                                              label: "In Progress",
-                                            ),
-                                            DropdownMenuEntry(
-                                              value: "Done",
-                                              label: "Done",
-                                            ),
-                                          ],
                                         ),
+
                                       );
                                     },
                                   ),
@@ -196,7 +185,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
 
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
@@ -276,7 +264,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
 
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
