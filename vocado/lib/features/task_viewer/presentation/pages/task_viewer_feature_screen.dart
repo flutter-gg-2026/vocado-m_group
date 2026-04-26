@@ -72,7 +72,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                           spacing: 16,
                           children: [
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
@@ -134,17 +133,16 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
 
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
                                   children: [
                                     Text(
-                                      "Completed Tasks",
+                                      "Late",
                                       style: TextStyle(
                                         fontWeight: .bold,
                                         fontSize: 20,
-                                        color: Colors.black,
+                                        color: Colors.redAccent,
                                       ),
                                     ),
                                     TextButton(
@@ -196,7 +194,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
 
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
@@ -276,7 +273,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
 
                             Column(
-                              spacing: 8,
                               children: [
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
