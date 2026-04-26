@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:vocado/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:vocado/features/profile/presentation/pages/profile_feature_screen.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
+import 'package:vocado/features/task_creator/presentation/pages/error_screen.dart';
 import 'package:vocado/features/task_creator/presentation/pages/task_creator_feature_screen.dart';
+import 'package:vocado/features/task_creator/presentation/pages/task_details_screen.dart';
 import 'package:vocado/features/tasks_board/presentation/cubit/tasks_board_cubit.dart';
 import 'package:vocado/features/tasks_board/presentation/pages/tasks_board_feature_screen.dart';
 import 'package:vocado/features/team/presentation/cubit/team_cubit.dart';
@@ -84,7 +86,19 @@ class AppRouter {
           child: const AuthFeatureScreen(),
         ),
       ),
-
+      GoRoute(
+        path: Routes.taskDetails,
+        builder: (context, state) {
+          final json = state.extra as Map<String, dynamic>;
+          return TaskDetailsScreen(json: json);
+        },
+      ),
+      GoRoute(
+        path: Routes.errorState,
+        builder: (context, state) {
+          return ErrorScreen();
+        }, // SplashScreen
+      ),
       GoRoute(
         path: Routes.taskViewer,
         builder: (context, state) => BlocProvider(

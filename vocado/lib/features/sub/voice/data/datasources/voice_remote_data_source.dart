@@ -46,7 +46,7 @@ class VoiceRemoteDataSource implements BaseVoiceRemoteDataSource {
 
       final json = await _dio.parseTask(
         text: text,
-        apiKey: "AIzaSyAXePRM5WtOER04gsVN_50w3NW4UJc22eU",
+        apiKey: "AIzaSyDVPwO96VQOE90WznpvwS7zYEkkmhSzLss",
       );
 
       return json;

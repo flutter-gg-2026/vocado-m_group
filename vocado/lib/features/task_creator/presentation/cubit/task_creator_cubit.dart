@@ -14,7 +14,7 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
         //here is when success result
       },
       (whenError) {
-        //here is when error result
+        emit(TaskCreatorErrorState(message: whenError.message));
       },
     );
   }

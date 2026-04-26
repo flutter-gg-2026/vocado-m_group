@@ -27,6 +27,9 @@ class VoiceFeatureWidget extends StatelessWidget {
               if (state is VoiceTextLoaded) {
                 getTask(state.json);
                 getTask(state.json);
+                print(
+                  "-----------------------------------------${state.json}----------------------------------",
+                );
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   getTask(state.json);
                 });
