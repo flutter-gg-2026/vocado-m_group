@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class TaskContainer extends StatelessWidget {
   const TaskContainer({
     super.key,
-    required this.status,
     required this.task,
     required this.date,
     required this.child
   });
 
-  final String status;
   final String task;
   final String date;
   final Widget child;
@@ -31,7 +29,6 @@ class TaskContainer extends StatelessWidget {
         crossAxisAlignment: .center,
         mainAxisAlignment: .center,
         children: [
-          Text(status, style: TextStyle(color: const Color.fromARGB(255, 225, 73, 73))),
           Text(task, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: .bold)),
           Row(
             children: [

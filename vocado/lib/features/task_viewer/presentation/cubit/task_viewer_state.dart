@@ -10,12 +10,15 @@ abstract class TaskViewerState extends Equatable {
 
 class TaskViewerInitialState extends TaskViewerState {}
 
-class TaskViewerUpdateTaskState extends TaskViewerState {}
+class TaskViewerLoadingState extends TaskViewerState {}
 
 class TaskViewerSuccessState extends TaskViewerState {
   final List<TaskViewerEntity> tasks;
 
   const TaskViewerSuccessState({required this.tasks});
+
+  @override
+  List<Object?> get props => [tasks];
 }
 class SignOutSuccessState extends TaskViewerState {}
 

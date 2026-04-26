@@ -45,59 +45,308 @@ class TaskViewerFeatureScreen extends StatelessWidget {
       ),
       body: BlocListener<TaskViewerCubit, TaskViewerState>(
         listener: (context, state) {
-          if (state is SignOutSuccessState) {
-            context.showSnackBar("Log out", isError: false);
-            context.go(Routes.auth);
-          }
-          if (state is TaskViewerErrorState) {
-            context.showSnackBar(state.message, isError: true);
+          context.hideLoading();
+          if (state is TaskViewerLoadingState){
+            context.showLoading();
           }
         },
-        child: Column(
-          children: [
-            FilledButton(
-              onPressed: () {
-                cubit.getTaskViewerMethod();
-              },
-              child: Text("get user tasks"),
-            ),
-
-            BlocBuilder<TaskViewerCubit, TaskViewerState>(
-              builder: (context, state) {
-                if (state is TaskViewerSuccessState) {
-                  return SizedBox(
-                    height: 250,
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => SizedBox(width: 10),
-                      scrollDirection: .horizontal,
-                      shrinkWrap: true,
-                      itemCount: state.tasks.length,
-                      itemBuilder: (context, index) {
-                        final task = state.tasks[index];
-                        return TaskContainer(
-                          status: task.status,
-                          task: task.task,
-                          date: task.dueDate,
-                          child: DropdownMenu(
-                            onSelected: (value) {
-                              cubit.changeTaskStatusMethod(taskId: task.id, newStatus: value!);
-                            },
-                            label: Text("Select Task Status"),
-                            dropdownMenuEntries: [
-                              DropdownMenuEntry(value: "In Progress", label: "In Progress"),
-                              DropdownMenuEntry(value: "Done", label: "Done"),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return Text('No Tasks Assigned');
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child: BlocListener<TaskViewerCubit, TaskViewerState>(
+              listener: (context, state) {
+                if (state is SignOutSuccessState) {
+                  context.showSnackBar("Log out", isError: false);
+                  context.go(Routes.auth);
+                }
+                if (state is TaskViewerErrorState) {
+                  context.showSnackBar(state.message, isError: true);
                 }
               },
+              child: Column(
+                children: [
+                  BlocBuilder<TaskViewerCubit, TaskViewerState>(
+                    builder: (context, state) {
+                      if (state is TaskViewerSuccessState) {
+                        return Column(
+                          spacing: 16,
+                          children: [
+                            Column(
+                              spacing: 8,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: .spaceBetween,
+                                  children: [
+                                    Text(
+                                      "New Tasks",
+                                      style: TextStyle(
+                                        fontWeight: .bold,
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Text("View all"),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(width: 10),
+                                    scrollDirection: .horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: state.tasks.length,
+                                    itemBuilder: (context, index) {
+                                      final task = state.tasks[index];
+                                      if (task.status != 'Pending') {
+                                        return SizedBox.shrink();
+                                      }
+                                      return TaskContainer(
+                                        task: task.task,
+                                        date: task.dueDate,
+                                        child: DropdownMenu(
+                                          onSelected: (value) {
+                                            cubit.changeTaskStatusMethod(
+                                              taskId: task.id,
+                                              newStatus: value!,
+                                            );
+                                          },
+                                          label: Text("Select Task Status"),
+                                          dropdownMenuEntries: [
+                                            DropdownMenuEntry(
+                                              value: "In Progress",
+                                              label: "In Progress",
+                                            ),
+                                            DropdownMenuEntry(
+                                              value: "Done",
+                                              label: "Done",
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Column(
+                              spacing: 8,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: .spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Completed Tasks",
+                                      style: TextStyle(
+                                        fontWeight: .bold,
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Text("View all"),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(width: 10),
+                                    scrollDirection: .horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: state.tasks.length,
+                                    itemBuilder: (context, index) {
+                                      final task = state.tasks[index];
+                                      if (task.status != 'Done') {
+                                        return SizedBox.shrink();
+                                      }
+                                      return TaskContainer(
+                                        task: task.task,
+                                        date: task.dueDate,
+                                        child: DropdownMenu(
+                                          onSelected: (value) {
+                                            cubit.changeTaskStatusMethod(
+                                              taskId: task.id,
+                                              newStatus: value!,
+                                            );
+                                          },
+                                          label: Text("Select Task Status"),
+                                          dropdownMenuEntries: [
+                                            DropdownMenuEntry(
+                                              value: "In Progress",
+                                              label: "In Progress",
+                                            ),
+                                            DropdownMenuEntry(
+                                              value: "Done",
+                                              label: "Done",
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Column(
+                              spacing: 8,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: .spaceBetween,
+                                  children: [
+                                    Text(
+                                      "In Progress",
+                                      style: TextStyle(
+                                        fontWeight: .bold,
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Text("View all"),
+                                    ),
+                                  ],
+                                ),
+                                ListView.separated(
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(height: 10),
+                                  shrinkWrap: true,
+                                  itemCount: state.tasks.length,
+                                  itemBuilder: (context, index) {
+                                    final task = state.tasks[index];
+                                    if (task.status != 'In Progress') {
+                                      return SizedBox.shrink();
+                                    }
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                          255,
+                                          208,
+                                          217,
+                                          221,
+                                        ),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: ListTile(
+                                        title: Text(
+                                          task.task,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: .bold,
+                                          ),
+                                        ),
+                                        subtitle: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.flag,
+                                              color: Color(0xff2DC9B0),
+                                            ),
+                                            Text(
+                                              task.dueDate.split('T')[0],
+                                              style: TextStyle(
+                                                color: Color(0xff2DC9B0),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        trailing: Checkbox(
+                                          value: false,
+                                          onChanged: (value) {
+                                            cubit.changeTaskStatusMethod(
+                                              taskId: task.id,
+                                              newStatus: "Done",
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+
+                            Column(
+                              spacing: 8,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: .spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Completed Tasks",
+                                      style: TextStyle(
+                                        fontWeight: .bold,
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Text("View all"),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(width: 10),
+                                    scrollDirection: .horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: state.tasks.length,
+                                    itemBuilder: (context, index) {
+                                      final task = state.tasks[index];
+                                      if (task.status != 'Done') {
+                                        return SizedBox.shrink();
+                                      }
+                                      return TaskContainer(
+                                        task: task.task,
+                                        date: task.dueDate,
+                                        child: DropdownMenu(
+                                          onSelected: (value) {
+                                            cubit.changeTaskStatusMethod(
+                                              taskId: task.id,
+                                              newStatus: value!,
+                                            );
+                                          },
+                                          label: Text("Select Task Status"),
+                                          dropdownMenuEntries: [
+                                            DropdownMenuEntry(
+                                              value: "In Progress",
+                                              label: "In Progress",
+                                            ),
+                                            DropdownMenuEntry(
+                                              value: "Done",
+                                              label: "Done",
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Text('No Tasks Assigned');
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
