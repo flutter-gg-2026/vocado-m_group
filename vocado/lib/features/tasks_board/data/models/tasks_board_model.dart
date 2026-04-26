@@ -6,19 +6,17 @@ part 'tasks_board_model.g.dart';
 @freezed
 abstract class TasksBoardModel with _$TasksBoardModel {
   const factory TasksBoardModel({
-    required int id,
-    required String firstName,
-    required String lastName,
-    
+    required String task,
+    required String due_date,
+    required String status,
   }) = _TasksBoardModel;
 
-  factory TasksBoardModel.fromJson(Map<String, Object?> json) => _$TasksBoardModelFromJson(json);
+  factory TasksBoardModel.fromJson(Map<String, Object?> json) =>
+      _$TasksBoardModelFromJson(json);
 }
-
-
 
 extension TasksBoardModelMapper on TasksBoardModel {
   TasksBoardEntity toEntity() {
-    return TasksBoardEntity(id: id, firstName: firstName, lastName: lastName);
+    return TasksBoardEntity(dueDate: due_date, task: task,status: status);
   }
-  }
+}
