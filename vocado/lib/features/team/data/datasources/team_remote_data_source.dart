@@ -38,7 +38,6 @@ class TeamRemoteDataSource implements BaseTeamRemoteDataSource {
   @override
   Future<List<MemberModel>> getAllMember() async {
     try {
-
       final role = await _supabase
           .from('roles')
           .select('id')
@@ -58,7 +57,6 @@ class TeamRemoteDataSource implements BaseTeamRemoteDataSource {
 
       return members.map((item) => MemberModel.fromJson(item)).toList();
     } catch (error) {
-     
       throw FailureExceptions.getException(error);
     }
   }

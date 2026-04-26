@@ -22,26 +22,33 @@ class VoiceCubit extends Cubit<VoiceState> {
   }
 
   Future<void> stopVoiceMethod() async {
+    print("STOP VOICE CALLED");
+
     emit(VoiceProcessing());
 
     final stopResult = await _voiceUseCase.stopVoice();
 
     stopResult.when(
       (voice) async {
-        path = voice.path;
+        print("VOICE PATH: ${voice.path}");
 
         final transcriptResult = await _voiceUseCase.transcript(voice.path);
 
+        print("TRANSCRIPT RESULT RECEIVED");
+
         transcriptResult.when(
           (text) {
+            print("TRANSCRIPT SUCCESS: $text");
             emit(VoiceTextLoaded(json: text, path: voice.path));
           },
           (error) {
+            print("TRANSCRIPT ERROR: ${error.message}");
             emit(VoiceErrorState(error.message));
           },
         );
       },
       (error) {
+        print("STOP ERROR: ${error.message}");
         emit(VoiceErrorState(error.message));
       },
     );

@@ -25,9 +25,7 @@ class VoiceFeatureWidget extends StatelessWidget {
               final isProcessing = state is VoiceProcessing;
 
               if (state is VoiceTextLoaded) {
-                getTask(state.json);
-                getTask(state.json);
-                print(
+                 print(
                   "-----------------------------------------${state.json}----------------------------------",
                 );
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -45,7 +43,6 @@ class VoiceFeatureWidget extends StatelessWidget {
                     onLongPressUp: () async {
                       await cubit.stopVoiceMethod();
                     },
-
                     child: AnimatedScale(
                       duration: Duration(milliseconds: 250),
                       scale: isRecording ? 1.15 : 1.0,
@@ -71,7 +68,7 @@ class VoiceFeatureWidget extends StatelessWidget {
 
                   SizedBox(
                     height: 70,
-                    width: .infinity,
+                    width: double.infinity,
                     child: isRecording
                         ? Lottie.asset(
                             "assets/animation/Voice line _ wave animation.json",
@@ -80,7 +77,7 @@ class VoiceFeatureWidget extends StatelessWidget {
                         : const SizedBox(),
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   if (isProcessing) LoadingWidget(),
                 ],

@@ -32,13 +32,24 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
 
     final task = json["task"]?.toString().trim() ?? "";
     final assignee = json["assignee"]?.toString().trim() ?? "";
-
     if (task.isEmpty || assignee.isEmpty) {
       emit(const TaskCreatorErrorState(message: "Invalid task data"));
       return;
     }
 
     emit(TaskCreatorSuccessState(json: json));
+  }
+
+  void addTask({required Map<String, dynamic> json}) async {
+    final result = await _taskCreatorUseCase.addTask(json: json);
+    result.when(
+      (success) {
+        emit(AddTaskSuccessState());
+      },
+      (whenError) {
+        emit(TaskCreatorErrorState(message: whenError.message));
+      },
+    );
   }
 
   @override

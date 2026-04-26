@@ -100,6 +100,14 @@ class AppRouter {
         }, // SplashScreen
       ),
       GoRoute(
+        path: Routes.auth,
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(GetIt.I.get()),
+          child: const AuthFeatureScreen(),
+        ),
+      ),
+
+      GoRoute(
         path: Routes.taskViewer,
         builder: (context, state) => BlocProvider(
           create: (context) => TaskViewerCubit(GetIt.I.get()),

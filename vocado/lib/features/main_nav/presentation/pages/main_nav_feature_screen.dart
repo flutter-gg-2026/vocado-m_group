@@ -22,7 +22,7 @@ class MainNavFeatureScreen extends StatelessWidget {
         type: .fixed,
         currentIndex: navigationShell.currentIndex,
         onTap: (index) => navigationShell.goBranch(index),
-        selectedItemColor: Colors.green,
+        selectedItemColor: const Color.fromRGBO(98, 42, 141, 1),
         unselectedItemColor: Colors.grey,
       ),
       body: navigationShell,

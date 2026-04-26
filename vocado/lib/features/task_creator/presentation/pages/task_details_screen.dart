@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:vocado/features/task_creator/presentation/widgets/button_widget.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vocado/core/widgets/button_widget.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/text_box_widget.dart';
 
 class TaskDetailsScreen extends StatelessWidget {
@@ -18,33 +18,40 @@ class TaskDetailsScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Padding(
-          padding: .all(16),
-          child: Column(
-            mainAxisAlignment: .center,
-            crossAxisAlignment: .start,
-            children: [
-              Text(
-                "Task is:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: .bold,
-                  color: Colors.black,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: .all(16),
+            child: Column(
+              mainAxisAlignment: .center,
+              crossAxisAlignment: .start,
+              children: [
+                Text(
+                  "Task is:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: .bold,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-
-              Text(json["task"], style: TextStyle(fontSize: 20)),
-
-              SizedBox(height: 20),
-
-              TextBox(text: "Assign To: ${json["assignee"]}"),
-
-              TextBox(text: "Deadline: 12:00pm - ${json["due_date"]}"),
-
-              SizedBox(height: 30),
-
-              ButtonWidget(text: "Approved", onPressed: () {}),
-            ],
+          
+                Text(json["task"], style: TextStyle(fontSize: 20)),
+          
+                SizedBox(height: 20),
+          
+                TextBox(text: "Assign To: ${json["assignee"]}"),
+          
+                TextBox(text: "Deadline: 12:00pm - ${json["due_date"]}"),
+          
+                SizedBox(height: 30),
+          
+                ButtonWidget(
+                  text: "Approved",
+                  onPressed: () {
+                    context.pop(json);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

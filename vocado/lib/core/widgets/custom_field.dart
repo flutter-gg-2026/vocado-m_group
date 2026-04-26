@@ -21,15 +21,14 @@ class CustomField extends StatelessWidget {
         labelText: hintText,
         hintText: hintText,
         prefixIcon: icon,
-        fillColor: Colors.deepPurpleAccent,
-        border: OutlineInputBorder(borderRadius: .circular(16),borderSide: BorderSide(
-          color: Colors.deepPurpleAccent
-        )),
-        
+        fillColor: const Color.fromRGBO(98, 42, 141, 1),
+        border: OutlineInputBorder(
+          borderRadius: .circular(16),
+          borderSide: BorderSide(color: const Color.fromRGBO(98, 42, 141, 1)),
+        ),
+
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.red
-          )
+          borderSide: BorderSide(color: Colors.red),
         ),
       ),
       validator: validator,
