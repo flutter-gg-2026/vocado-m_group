@@ -11,10 +11,11 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
     final result = await _taskViewerUseCase.getTaskViewer();
     result.when(
       (success) {
-        //here is when success result
+        print("Success State");
+        emit(TaskViewerSuccessState(tasks: success));
       },
       (whenError) {
-        //here is when error result
+        emit(TaskViewerErrorState(message: whenError.message));
       },
     );
   }

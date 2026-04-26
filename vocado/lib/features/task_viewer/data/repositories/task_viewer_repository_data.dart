@@ -17,10 +17,10 @@ class TaskViewerRepositoryData implements TaskViewerRepositoryDomain{
   TaskViewerRepositoryData(this.remoteDataSource);
 
 @override
-  Future<Result<TaskViewerEntity, Failure>> getTaskViewer() async {
+  Future<Result<List<TaskViewerEntity>, Failure>> getTaskViewer() async {
     try {
       final response = await remoteDataSource.getTaskViewer();
-      return Success(response.toEntity());
+      return Success(response.map((item) => item.toEntity()).toList());
     } catch (error) {
       return Error(FailureExceptions.getException(error));
     }
