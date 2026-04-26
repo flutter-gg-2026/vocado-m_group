@@ -10,7 +10,6 @@ abstract class BaseTasksBoardRemoteDataSource {
 @LazySingleton(as: BaseTasksBoardRemoteDataSource)
 class TasksBoardRemoteDataSource implements BaseTasksBoardRemoteDataSource {
   final SupabaseClient _supabase;
-  
 
   TasksBoardRemoteDataSource(this._supabase);
   @override
@@ -21,7 +20,7 @@ class TasksBoardRemoteDataSource implements BaseTasksBoardRemoteDataSource {
       if (index == 0) {
         status = 'In Progress';
       } else if (index == 1) {
-        status = 'Done';
+        status = 'Doe';
       } else {
         status = 'Pending';
       }
@@ -31,7 +30,6 @@ class TasksBoardRemoteDataSource implements BaseTasksBoardRemoteDataSource {
           .select("task , due_date,status")
           .eq('status', status);
 
-      print(query.toString());
       return query.map((item) => TasksBoardModel.fromJson(item)).toList();
     } catch (error) {
       throw FailureExceptions.getException(error);
