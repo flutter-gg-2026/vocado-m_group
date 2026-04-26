@@ -161,31 +161,22 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                                     itemCount: state.tasks.length,
                                     itemBuilder: (context, index) {
                                       final task = state.tasks[index];
-                                      if (task.status != 'Done') {
+                                      if (task.status != 'Done' && task.dueDate.toDateTime!.isBefore(DateTime.timestamp())) {
                                         return SizedBox.shrink();
                                       }
                                       return TaskContainer(
                                         task: task.task,
                                         date: task.dueDate,
-                                        child: DropdownMenu(
-                                          onSelected: (value) {
+                                        child: Checkbox(
+                                          value: false,
+                                          onChanged: (value) {
                                             cubit.changeTaskStatusMethod(
                                               taskId: task.id,
-                                              newStatus: value!,
+                                              newStatus: "Done",
                                             );
                                           },
-                                          label: Text("Select Task Status"),
-                                          dropdownMenuEntries: [
-                                            DropdownMenuEntry(
-                                              value: "In Progress",
-                                              label: "In Progress",
-                                            ),
-                                            DropdownMenuEntry(
-                                              value: "Done",
-                                              label: "Done",
-                                            ),
-                                          ],
                                         ),
+
                                       );
                                     },
                                   ),
