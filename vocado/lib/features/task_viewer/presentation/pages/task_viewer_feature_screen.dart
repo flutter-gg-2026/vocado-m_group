@@ -161,7 +161,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                                     itemCount: state.tasks.length,
                                     itemBuilder: (context, index) {
                                       final task = state.tasks[index];
-                                      if (task.status != 'Done' && task.dueDate.toDateTime!.isBefore(DateTime.timestamp())) {
+                                      if (task.status == 'Done' || task.dueDate.toDateTime!.isAfter(DateTime.now())) {
                                         return SizedBox.shrink();
                                       }
                                       return TaskContainer(
