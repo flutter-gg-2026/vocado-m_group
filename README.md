@@ -1,69 +1,113 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/hJTyw86k)
-# 🎙️ VocaDo: Your Task Manager 
-### *The Challenge: Transform Voice into Actionable Logic*
+# 🎙 VocaDo: Your Task Manager
 
-## 📝 Project Vision
-**VocaDo** is a project built for developers to explore the intersection of **Mobile Development** and **Generative AI**. The goal is to build an application that doesn't just record audio, but "understands" it—converting natural speech into structured tasks and routing users based on their professional roles as defined in the system.
+VocaDo is a Flutter application that transforms voice input into structured tasks using AI.  
+The app allows users to record voice, convert it into JSON tasks using Gemini AI, and manage tasks based on roles (Admin / User).
 
 ---
 
-## 🛠️ Tech Stack Requirements
-To successfully build VocaDo, you should implement the following technologies:
+## 📖 Project Overview
 
-### 1. Mobile Framework & Architecture
-* **Flutter & Dart:** The core framework.
-* **Clean Architecture:** Separate the project into `Data`, `Domain`, and `Presentation` layers.
-* **BLoC Pattern:** For robust state management and event-driven logic.
+Project Name: VocaDo
 
-### 2. The AI Pipeline (The "Brain🧠")
-* **Speech-to-Text (STT):** Suggested use of **Gladia API** or **OpenAI Whisper** to convert audio files into raw text.
-* **Natural Language Processing (NLP):** Use an LLM (like **Gemini 1.5 Flash**) to parse the raw text.
-    * *Challenge:* The AI must return a structured **JSON** object:
-      ```json
-      { "task": "Update the design in Figma", "assignee": "Rasha", "due_date": "2026-04-23" }
-      ```
+This app provides:
 
-### 3. Role-Based Access Control (RBAC)
-Implement a logic-gate during the login flow:
-* **Admin View:** Access to the **Voice Record Page** to architect and assign tasks.
-* **User View:** Access to the **Task Board** and **Task-index** to view assigned work.
+- 🔐 User Authentication (Admin / User roles)
+- 🎙 Voice Task Recording
+- 🤖 AI Task Generation using Gemini + Gladia (Speech-to-Text)
+- 🧾 Task Confirmation Screen before saving
+- 📊 Task Board with filtering (New / In Progress / Late)
+- 👥 Team Management (Admin)
+- 👤 Profile Management
+- ⚠️ Error Handling Screen (Oops state)
+
+The app ensures that voice input is automatically converted into structured tasks that can be assigned and tracked.
 
 ---
 
-## 🏗️ Suggested Project Roadmap (Design-Driven)
+## 📱 App Flow
 
-### Phase 1: Authentication & Entry Points
-* **Login UI:** Build the `Login Page`.
-* **Role Routing:** Implement logic to distinguish between `role: admin` and `role: user`.
-* **Home Dashboard:** Create the `Task-index` screen showing the summary of "New", "Late", and "In Progress" tasks.
+1. User logs in (Admin or User)
+2. Admin records a voice task 🎙
+3. Audio is sent to Speech-to-Text API (Gladia)
+4. Text is processed by Gemini AI 🤖
+5. Structured JSON task is returned
+6. Admin reviews task in Task Details screen
+7. Task is approved and saved to database
+8. Users view assigned tasks in Task Board
 
-### Phase 2: The Voice Command Center (Admin Feature)
-* **Audio Capture:** Integrate the `record` package in the `Voice recorded Page`.
-* **Visual Feedback:** Use `Animations` to create a pulse effect on the microphone icon during recording.
-* **Error Handling:** Build the `Error Status` ("Opps!") screen to handle failed recording attempts.
-
-### Phase 3: AI Orchestration & Parsing
-* **STT Integration:** Send audio to Gladia API to receive the transcript.
-* **Prompt Engineering:** Send the transcript to Gemini with a System Prompt that forces a JSON response.
-* **Task Confirmation:** Map the AI response to the `Task Details` screen so the Admin can verify the task before clicking "Approved".
-
-### Phase 4: State Management
-* Use **BLoC** to handle the loading states (`Recording` -> `Transcribing` -> `Parsing` -> `Success`).
-
-## 📂 Expected Folder Structure
-Students should follow this structure to maintain "Cleanliness":
-```text
-lib/
- ├── core/              # Network info, DI (Get_it), Error handling
- ├── features/
- │   ├── auth/          # Login & Role Logic
- │   ├── task_creator/  # Admin Feature: Record & AI Process
- │   └── task_viewer/   # User Feature: Task List & Details
- └── main.dart
-```
 ---
-## Ready to Start ! Check the project Design 
-[Click ME](https://www.figma.com/design/orIarysJ6qilKJgHukQfgH/Untitled?node-id=0-1&t=oePpVXgvCfdIXwS2-1) |
 
-#### All The Best ✨✨✨
+## 🧠 Features
 
+- 🔐 Authentication (Supabase Auth)
+- 🎙 Voice Recording System
+- 🤖 AI Task Generation (STT + Gemini)
+- 🧾 Task Approval Screen
+- 📊 Task Board (Filters: New / Late / In Progress)
+- 👥 Team Management (Admin only)
+- 👤 Profile Screen
+- ⚠️ Error Screen (Oops state)
+- 🔄 Role-based routing (Admin / User)
+- ⚡ State Management using Cubit (BLoC)
+
+---
+
+## 🎨 Main Screens
+
+- 🔐 Login Screen
+- 🔐 Sign Up Screen
+- 🎙 Voice Recorder (Task Creator)
+- 🧾 Task Details (Approval Screen)
+- 📊 Task Board
+- 👥 Team Screen
+- 👤 Profile Screen
+- ⚠️ Error Screen
+- 👤 Task Viewer (User Side)
+
+---
+
+## 📸 Screenshots
+
+| Login | Sign Up | Voice Recorder |
+|---|---|---|
+| <img src="vocado/assets/images/login.jpg" width="200"/> | <img src="vocado/assets/images/signup.jpg" width="200"/> | <img src="vocado/assets/images/voice.jpg" width="200"/> |
+
+| Task Details | Task Board | Profile |
+|---|---|---|
+| <img src="vocado/assets/images/task_details.jpg" width="200"/> | <img src="vocado/assets/images/task_board.jpg" width="200"/> | <img src="vocado/assets/images/profile.jpg" width="200"/> |
+
+| Team | Error Screen | Task Viewer |
+|---|---|---|
+| <img src="vocado/assets/images/team.jpg" width="200"/> | <img src="vocado/assets/images/error.jpg" width="200"/> | <img src="vocado/assets/images/task_viewer.jpg" width="200"/> |
+
+---
+
+## 🎬 Demo Video
+
+
+
+---
+
+## 📦 Packages Used
+
+- flutter_bloc
+- supabase_flutter
+- get_it
+- injectable
+- equatable
+- json_annotation
+- freezed
+- dio
+- go_router
+- any_image_view
+- uuid
+- lottie
+- flutter_launcher_icons
+
+---
+
+## ⚙️ Setup & Installation
+
+1. Clone the repository: `https://github.com/flutter-gg-2026/vocado-m_group.git`
+2. Install dependencies: `flutter pub get`
+3. Run the app: `flutter run`
