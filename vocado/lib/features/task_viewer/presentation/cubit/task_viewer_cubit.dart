@@ -15,6 +15,21 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
         emit(TaskViewerSuccessState(tasks: success));
       },
       (whenError) {
+        print("Error State");
+        emit(TaskViewerErrorState(message: whenError.message));
+      },
+    );
+  }
+
+  Future<void> changeTaskStatusMethod({required String taskId ,required String newStatus}) async {
+    final result = await _taskViewerUseCase.changeTaskStatus(taskId: taskId, newStatus: newStatus);
+    result.when(
+      (success) {
+        print("Updated State");
+        emit(TaskViewerUpdateTaskState());
+      },
+      (whenError) {
+        print("Error State");
         emit(TaskViewerErrorState(message: whenError.message));
       },
     );

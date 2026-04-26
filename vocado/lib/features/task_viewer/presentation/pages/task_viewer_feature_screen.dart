@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vocado/core/extensions/context_extensions.dart';
 import 'package:vocado/core/extensions/font_extensions.dart';
+import 'package:vocado/core/extensions/string_extensions.dart';
 import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/core/services/user_service.dart';
 import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
 import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_state.dart';
+import 'package:vocado/features/task_viewer/presentation/widgets/task_container.dart';
 
 class TaskViewerFeatureScreen extends StatelessWidget {
   const TaskViewerFeatureScreen({super.key});
@@ -64,57 +66,29 @@ class TaskViewerFeatureScreen extends StatelessWidget {
               builder: (context, state) {
                 if (state is TaskViewerSuccessState) {
                   return SizedBox(
-                    height: 150,
+                    height: 250,
                     child: ListView.separated(
                       separatorBuilder: (context, index) => SizedBox(width: 10),
                       scrollDirection: .horizontal,
-
                       shrinkWrap: true,
-
                       itemCount: state.tasks.length,
                       itemBuilder: (context, index) {
                         final task = state.tasks[index];
-                        return Container(
-                          width: 100,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.purpleAccent,
-                                Colors.blue.shade300,
-                              ],
-                            ),
-                            borderRadius: .circular(16),
-                          ),
-                          child: Column(
-                            spacing: 5,
-                            crossAxisAlignment: .center,
-                            mainAxisAlignment: .center,
-                            children: [
-                              Text(
-                                task.status,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Text(
-                                task.task,
-                                style: TextStyle(color: Color(0xff2DC9B0)),
-                              ),
-                              Text(
-                                task.dueDate,
-                                style: TextStyle(color: Color(0xff2DC9B0)),
-                              ),
+                        return TaskContainer(
+                          status: task.status,
+                          task: task.task,
+                          date: task.dueDate,
+                          child: DropdownMenu(
+                            onSelected: (value) {
+                              cubit.changeTaskStatusMethod(taskId: task.id, newStatus: value!);
+                            },
+                            label: Text("Select Task Status"),
+                            dropdownMenuEntries: [
+                              DropdownMenuEntry(value: "In Progress", label: "In Progress"),
+                              DropdownMenuEntry(value: "Done", label: "Done"),
                             ],
                           ),
                         );
-
-                        // Container(
-                        //   height: 100,
-                        //   width: 200,
-                        //   child: Column(children: [
-                        //     Text(task.status),
-                        //     Text(task.task),
-                        //     Text(task.dueDate),
-                        //   ]));
                       },
                     ),
                   );

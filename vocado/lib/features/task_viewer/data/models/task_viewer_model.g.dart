@@ -9,17 +9,17 @@ part of 'task_viewer_model.dart';
 _TaskViewerModel _$TaskViewerModelFromJson(Map<String, dynamic> json) =>
     _TaskViewerModel(
       id: json['id'] as String,
-      userId: json['userId'] as String? ?? 'user_id',
+      userId: json['user_id'] as String,
       task: json['task'] as String,
       status: json['status'] as String,
-      dueDate: json['dueDate'] as String? ?? 'due_date',
+      dueDate: json['due_date'] as String,
     );
 
 Map<String, dynamic> _$TaskViewerModelToJson(_TaskViewerModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'userId': instance.userId,
+      'user_id': instance.userId,
       'task': instance.task,
       'status': instance.status,
-      'dueDate': instance.dueDate,
+      'due_date': instance.dueDate,
     };

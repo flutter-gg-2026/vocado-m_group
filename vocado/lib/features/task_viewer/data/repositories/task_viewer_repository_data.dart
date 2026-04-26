@@ -1,4 +1,3 @@
-
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
@@ -10,13 +9,12 @@ import 'package:vocado/features/task_viewer/data/models/task_viewer_model.dart';
 import 'package:vocado/features/task_viewer/domain/repositories/task_viewer_repository_domain.dart';
 
 @LazySingleton(as: TaskViewerRepositoryDomain)
-class TaskViewerRepositoryData implements TaskViewerRepositoryDomain{
+class TaskViewerRepositoryData implements TaskViewerRepositoryDomain {
   final BaseTaskViewerRemoteDataSource remoteDataSource;
-
 
   TaskViewerRepositoryData(this.remoteDataSource);
 
-@override
+  @override
   Future<Result<List<TaskViewerEntity>, Failure>> getTaskViewer() async {
     try {
       final response = await remoteDataSource.getTaskViewer();
@@ -25,11 +23,27 @@ class TaskViewerRepositoryData implements TaskViewerRepositoryDomain{
       return Error(FailureExceptions.getException(error));
     }
   }
-  
+
   @override
   Future<Result<bool, Failure>> getSignOut() async {
     try {
       final response = await remoteDataSource.getSignOut();
+      return Success(response);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
+
+  @override
+  Future<Result<bool, Failure>> changeTaskStatus({
+    required String taskId,
+    required String newStatus,
+  }) async {
+    try {
+      final response = await remoteDataSource.changeTaskStatus(
+        newStatus: newStatus,
+        taskId: taskId,
+      );
       return Success(response);
     } catch (error) {
       return Error(FailureExceptions.getException(error));

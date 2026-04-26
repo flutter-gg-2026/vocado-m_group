@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:vocado/core/extensions/string_extensions.dart';
 
 class TaskViewerEntity extends Equatable {
   final String id;
@@ -11,7 +12,8 @@ class TaskViewerEntity extends Equatable {
     required this.id,
     required this.userId,
     required this.task,
-    required this.status, required this.dueDate,
+    required this.status,
+    required  this.dueDate,
   });
 
   @override

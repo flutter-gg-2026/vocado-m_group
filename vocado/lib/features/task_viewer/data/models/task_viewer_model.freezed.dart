@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TaskViewerModel {
 
- String get id;@JsonKey(defaultValue: "user_id") String get userId; String get task; String get status;@JsonKey(defaultValue: "due_date") String get dueDate;
+ String get id;@JsonKey(name: "user_id") String get userId; String get task; String get status;@JsonKey(name: "due_date") String get dueDate;
 /// Create a copy of TaskViewerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $TaskViewerModelCopyWith<$Res>  {
   factory $TaskViewerModelCopyWith(TaskViewerModel value, $Res Function(TaskViewerModel) _then) = _$TaskViewerModelCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(defaultValue: "user_id") String userId, String task, String status,@JsonKey(defaultValue: "due_date") String dueDate
+ String id,@JsonKey(name: "user_id") String userId, String task, String status,@JsonKey(name: "due_date") String dueDate
 });
 
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(defaultValue: "user_id")  String userId,  String task,  String status, @JsonKey(defaultValue: "due_date")  String dueDate)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: "user_id")  String userId,  String task,  String status, @JsonKey(name: "due_date")  String dueDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskViewerModel() when $default != null:
 return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);case _:
@@ -178,7 +178,7 @@ return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(defaultValue: "user_id")  String userId,  String task,  String status, @JsonKey(defaultValue: "due_date")  String dueDate)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: "user_id")  String userId,  String task,  String status, @JsonKey(name: "due_date")  String dueDate)  $default,) {final _that = this;
 switch (_that) {
 case _TaskViewerModel():
 return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);case _:
@@ -198,7 +198,7 @@ return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(defaultValue: "user_id")  String userId,  String task,  String status, @JsonKey(defaultValue: "due_date")  String dueDate)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: "user_id")  String userId,  String task,  String status, @JsonKey(name: "due_date")  String dueDate)?  $default,) {final _that = this;
 switch (_that) {
 case _TaskViewerModel() when $default != null:
 return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);case _:
@@ -213,14 +213,14 @@ return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);cas
 @JsonSerializable()
 
 class _TaskViewerModel implements TaskViewerModel {
-  const _TaskViewerModel({required this.id, @JsonKey(defaultValue: "user_id") required this.userId, required this.task, required this.status, @JsonKey(defaultValue: "due_date") required this.dueDate});
+  const _TaskViewerModel({required this.id, @JsonKey(name: "user_id") required this.userId, required this.task, required this.status, @JsonKey(name: "due_date") required this.dueDate});
   factory _TaskViewerModel.fromJson(Map<String, dynamic> json) => _$TaskViewerModelFromJson(json);
 
 @override final  String id;
-@override@JsonKey(defaultValue: "user_id") final  String userId;
+@override@JsonKey(name: "user_id") final  String userId;
 @override final  String task;
 @override final  String status;
-@override@JsonKey(defaultValue: "due_date") final  String dueDate;
+@override@JsonKey(name: "due_date") final  String dueDate;
 
 /// Create a copy of TaskViewerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -255,7 +255,7 @@ abstract mixin class _$TaskViewerModelCopyWith<$Res> implements $TaskViewerModel
   factory _$TaskViewerModelCopyWith(_TaskViewerModel value, $Res Function(_TaskViewerModel) _then) = __$TaskViewerModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(defaultValue: "user_id") String userId, String task, String status,@JsonKey(defaultValue: "due_date") String dueDate
+ String id,@JsonKey(name: "user_id") String userId, String task, String status,@JsonKey(name: "due_date") String dueDate
 });
 
 

@@ -14,6 +14,11 @@ class TaskViewerUseCase {
    Future<Result<List<TaskViewerEntity>, Failure>> getTaskViewer() async {
     return _repositoryData.getTaskViewer();
   }
+
+  Future<Result<bool, Failure>> changeTaskStatus({required String taskId ,required String newStatus}){
+    return _repositoryData.changeTaskStatus(newStatus: newStatus, taskId: taskId);
+  }
+
    Future<Result<bool, Failure>> getSignOut() async {
     return _repositoryData.getSignOut();
   }
