@@ -15,7 +15,7 @@ class TasksBoardFeatureScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('TabBar Sample'),
+          title: const Text('Task board'),
           bottom: TabBar(
             onTap: (index) {
               cubit.getTasksBoardMethod(index: index);
