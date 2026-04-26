@@ -3,6 +3,7 @@ import 'package:vocado/core/errors/failure.dart';
 import 'package:vocado/features/task_viewer/domain/entities/task_viewer_entity.dart';
 
 abstract class TaskViewerRepositoryDomain {
-    Future<Result<TaskViewerEntity, Failure>> getTaskViewer();
+    Future<Result<List<TaskViewerEntity>, Failure>> getTaskViewer();
+    Future<Result<bool, Failure>> changeTaskStatus({required String taskId ,required String newStatus});
     Future<Result<bool, Failure>> getSignOut();
 }

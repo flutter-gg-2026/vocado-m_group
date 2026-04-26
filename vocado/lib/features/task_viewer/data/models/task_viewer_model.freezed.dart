@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TaskViewerModel {
 
- int get id; String get firstName; String get lastName;
+ String get id;@JsonKey(name: "user_id") String get userId; String get task; String get status;@JsonKey(name: "due_date") String get dueDate;
 /// Create a copy of TaskViewerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TaskViewerModelCopyWith<TaskViewerModel> get copyWith => _$TaskViewerModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskViewerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskViewerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.task, task) || other.task == task)&&(identical(other.status, status) || other.status == status)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,userId,task,status,dueDate);
 
 @override
 String toString() {
-  return 'TaskViewerModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'TaskViewerModel(id: $id, userId: $userId, task: $task, status: $status, dueDate: $dueDate)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TaskViewerModelCopyWith<$Res>  {
   factory $TaskViewerModelCopyWith(TaskViewerModel value, $Res Function(TaskViewerModel) _then) = _$TaskViewerModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String firstName, String lastName
+ String id,@JsonKey(name: "user_id") String userId, String task, String status,@JsonKey(name: "due_date") String dueDate
 });
 
 
@@ -65,11 +65,13 @@ class _$TaskViewerModelCopyWithImpl<$Res>
 
 /// Create a copy of TaskViewerModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? task = null,Object? status = null,Object? dueDate = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,task: null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -155,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: "user_id")  String userId,  String task,  String status, @JsonKey(name: "due_date")  String dueDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskViewerModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);case _:
   return orElse();
 
 }
@@ -176,10 +178,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: "user_id")  String userId,  String task,  String status, @JsonKey(name: "due_date")  String dueDate)  $default,) {final _that = this;
 switch (_that) {
 case _TaskViewerModel():
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +198,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: "user_id")  String userId,  String task,  String status, @JsonKey(name: "due_date")  String dueDate)?  $default,) {final _that = this;
 switch (_that) {
 case _TaskViewerModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.userId,_that.task,_that.status,_that.dueDate);case _:
   return null;
 
 }
@@ -211,12 +213,14 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 @JsonSerializable()
 
 class _TaskViewerModel implements TaskViewerModel {
-  const _TaskViewerModel({required this.id, required this.firstName, required this.lastName});
+  const _TaskViewerModel({required this.id, @JsonKey(name: "user_id") required this.userId, required this.task, required this.status, @JsonKey(name: "due_date") required this.dueDate});
   factory _TaskViewerModel.fromJson(Map<String, dynamic> json) => _$TaskViewerModelFromJson(json);
 
-@override final  int id;
-@override final  String firstName;
-@override final  String lastName;
+@override final  String id;
+@override@JsonKey(name: "user_id") final  String userId;
+@override final  String task;
+@override final  String status;
+@override@JsonKey(name: "due_date") final  String dueDate;
 
 /// Create a copy of TaskViewerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskViewerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskViewerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.task, task) || other.task == task)&&(identical(other.status, status) || other.status == status)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,userId,task,status,dueDate);
 
 @override
 String toString() {
-  return 'TaskViewerModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'TaskViewerModel(id: $id, userId: $userId, task: $task, status: $status, dueDate: $dueDate)';
 }
 
 
@@ -251,7 +255,7 @@ abstract mixin class _$TaskViewerModelCopyWith<$Res> implements $TaskViewerModel
   factory _$TaskViewerModelCopyWith(_TaskViewerModel value, $Res Function(_TaskViewerModel) _then) = __$TaskViewerModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String firstName, String lastName
+ String id,@JsonKey(name: "user_id") String userId, String task, String status,@JsonKey(name: "due_date") String dueDate
 });
 
 
@@ -268,11 +272,13 @@ class __$TaskViewerModelCopyWithImpl<$Res>
 
 /// Create a copy of TaskViewerModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? task = null,Object? status = null,Object? dueDate = null,}) {
   return _then(_TaskViewerModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,task: null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
