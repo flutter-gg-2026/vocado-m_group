@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vocado/core/extensions/context_extensions.dart';
 import 'package:vocado/features/team/presentation/cubit/team_cubit.dart';
 import 'package:vocado/features/team/presentation/cubit/team_state.dart';
+import 'package:vocado/features/team/presentation/widgets/team_widget.dart';
 
 class TeamFeatureScreen extends StatelessWidget {
   const TeamFeatureScreen({super.key});
@@ -63,53 +65,31 @@ class TeamFeatureScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is TeamSuccessState) {
               return Column(
+                crossAxisAlignment: .center,
+                mainAxisAlignment: .center,
                 spacing: 10,
                 children: [
                   SizedBox(
-                    height: 20.sh,
-                    child: ListView(
-                      scrollDirection: .horizontal,
-                      children: [
-                        Container(
-                          width: 40.sw,
-                          height: 20.sh,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: .circular(16),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: .center,
-                            mainAxisAlignment: .center,
-                            children: [
-                              Text(state.team[0].teamleadName),
-                              Text(state.team[0].name),
-                              Text("Team Leader"),
-                            ],
-                          ),
-                        ),
-
-                        ...state.team[0].teamMembers
-                            .map(
-                              (member) => Container(
-                                width: 40.sw,
-                                height: 20.sh,
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: .circular(16),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: .center,
-                                  mainAxisAlignment: .center,
-                                  children: [
-                                    Text(member.name),
-                                    Text(state.team[0].name),
-                                    Text(member.role),
-                                  ],
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ],
+                    height: 25.sh,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.team[0].teamMembers.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == 0) {
+                          return TeamWidget(
+                            memberName: state.team[0].teamleadName,
+                            teamName: state.team[0].name,
+                            role: "Team Leader",
+                          );
+                        }
+                        final member = state.team[0].teamMembers[index - 1];
+                        return TeamWidget(
+                          memberName: member.name,
+                          teamName: state.team[0].name,
+                          role: member.role,
+                        );
+                      },
+                      separatorBuilder: (context, index) => Gap(16),
                     ),
                   ),
                   FilledButton(
@@ -122,7 +102,7 @@ class TeamFeatureScreen extends StatelessWidget {
                 ],
               );
             }
-            return Text("Loading");
+            return Center(child: CircularProgressIndicator());
           },
         ),
       ),

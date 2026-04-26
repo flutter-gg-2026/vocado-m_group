@@ -13,4 +13,7 @@ class TaskCreatorUseCase {
   Future<Result<TaskCreatorEntity, Failure>> getTaskCreator() async {
     return _repositoryData.getTaskCreator();
   }
+  Future<Result<bool, Failure>> addTask({required Map<String, dynamic> json}) async {
+    return _repositoryData.addTask(json: json);
+  }
 }

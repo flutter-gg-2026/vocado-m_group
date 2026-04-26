@@ -41,6 +41,18 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
     emit(TaskCreatorSuccessState(json: json));
   }
 
+  void addTask({required Map<String, dynamic> json}) async {
+    final result = await _taskCreatorUseCase.addTask(json: json);
+    result.when(
+      (success) {
+        emit(AddTaskSuccessState());
+      },
+      (whenError) {
+        emit(TaskCreatorErrorState(message: whenError.message));
+      },
+    );
+  }
+
   @override
   Future<void> close() {
     //here is when close cubit

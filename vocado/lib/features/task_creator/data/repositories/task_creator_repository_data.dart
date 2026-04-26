@@ -23,4 +23,14 @@ class TaskCreatorRepositoryData implements TaskCreatorRepositoryDomain {
       return Error(FailureExceptions.getException(error));
     }
   }
+  
+  @override
+  Future<Result<bool, Failure>> addTask({required Map<String, dynamic> json}) async{
+   try {
+      final response = await remoteDataSource.addTask(json: json);
+      return Success(response);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
 }

@@ -12,7 +12,6 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
-import 'package:vocado/core/services/local_keys_service.dart' as _i140;
 import 'package:vocado/features/profile/data/datasources/profile_remote_data_source.dart'
     as _i489;
 import 'package:vocado/features/profile/data/repositories/profile_repository_data.dart'
@@ -30,10 +29,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i489.BaseProfileRemoteDataSource>(
-      () => _i489.ProfileRemoteDataSource(
-        gh<_i140.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-      ),
+      () => _i489.ProfileRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
     gh.lazySingleton<_i671.ProfileRepositoryDomain>(
       () =>

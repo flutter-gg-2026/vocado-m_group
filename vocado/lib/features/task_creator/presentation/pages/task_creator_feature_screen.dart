@@ -17,12 +17,20 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
       listenWhen: (previous, current) =>
           current is TaskCreatorSuccessState ||
           current is TaskCreatorErrorState,
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is TaskCreatorSuccessState) {
-          context.push(Routes.taskDetails, extra: state.json);
+          final json = await context.push(
+            Routes.taskDetails,
+            extra: state.json,
+          );
+          if (json != null) {
+            cubit.addTask(json: json as Map<String, dynamic>);
+          }
         }
         if (state is TaskCreatorErrorState) {
-          context.push(Routes.errorState);
+          if (context.mounted) {
+            context.push(Routes.errorState);
+          }
         }
       },
       child: Scaffold(

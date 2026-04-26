@@ -46,7 +46,7 @@ class VoiceService {
   }
 
   Future<String> transcribe(String path) async {
-    const apiKey = "c4e51c20-0104-4bad-a709-7b543a0f0d0a";
+    const apiKey = "AIzaSyDVPwO96VQOE90WznpvwS7zYEkkmhSzLss";
     final upload = await _dio.post(
       "https://api.gladia.io/v2/upload",
       data: FormData.fromMap({"audio": await MultipartFile.fromFile(path)}),

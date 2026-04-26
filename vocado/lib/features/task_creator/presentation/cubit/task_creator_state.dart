@@ -16,6 +16,7 @@ class TaskCreatorSuccessState extends TaskCreatorState {
   @override
   List<Object?> get props => [json];
 }
+class AddTaskSuccessState extends TaskCreatorState {}
 
 class TaskCreatorErrorState extends TaskCreatorState {
   final String message;

@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/button_widget.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/text_box_widget.dart';
 
@@ -43,7 +43,12 @@ class TaskDetailsScreen extends StatelessWidget {
 
               SizedBox(height: 30),
 
-              ButtonWidget(text: "Approved", onPressed: () {}),
+              ButtonWidget(
+                text: "Approved",
+                onPressed: () {
+                  context.pop(json);
+                },
+              ),
             ],
           ),
         ),
