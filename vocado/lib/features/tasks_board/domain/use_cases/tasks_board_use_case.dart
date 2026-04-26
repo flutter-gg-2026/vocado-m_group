@@ -11,7 +11,7 @@ class TasksBoardUseCase {
 
   TasksBoardUseCase(this._repositoryData);
 
-   Future<Result<TasksBoardEntity, Failure>> getTasksBoard() async {
-    return _repositoryData.getTasksBoard();
+   Future<Result<List<TasksBoardEntity>, Failure>> getTasksBoard({required int index}) async {
+    return _repositoryData.getTasksBoard(index: index);
   }
 }

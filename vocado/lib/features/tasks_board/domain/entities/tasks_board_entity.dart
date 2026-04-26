@@ -1,16 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class TasksBoardEntity extends Equatable {
-  final int id;
-  final String firstName;
-  final String lastName;
+  final String task;
+  final String dueDate;
+  final String status;
 
-  const TasksBoardEntity({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-  });
+  const TasksBoardEntity({required this.task, required this.dueDate, required this.status});
 
   @override
-  List<Object?> get props => [firstName, lastName, id];
+  List<Object?> get props => [task, dueDate,status];
 }
